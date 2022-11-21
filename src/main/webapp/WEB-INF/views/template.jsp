@@ -22,7 +22,7 @@
 			<div class="nav-item d-flex">
 				<div class="nav-link text-dark pe-sm-2">DB-Brand</div>
 				<div class="nav-link text-dark me-3" style="font-weight: bold">DB-Location</div>
-				<a class="nav-link px-3" href="/Socks/member/Logot.do">로그아웃</a>
+				<a class="nav-link px-3" href="/Socks/member/login.do">로그아웃</a>
 			</div>
 		</div>
 	</header>

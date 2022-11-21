@@ -17,7 +17,7 @@
 	style="border: 1px solid black;">
 	<main>
 		<section>
-			<form method="post" action="/Socks/member/.do">
+			<form method="post" action="/Socks/views/template.do">
 				<!-- 브랜드 이름 -->
 				<div>
 					<div class="d-grid col-6 mb-3 mx-auto">
@@ -25,7 +25,9 @@
 							id="country" value="" class="form-select"
 							placeholder="Brand_Name" required>
 							<option value="" disabled selected>Brand_name</option>
-							<option value="">브랜드</option>
+							<c:forEach items="${typelist}" var="bdto">
+								<option value="${bdto.Brand_ID}">${bdto.Description}</option>
+							</c:forEach>
 						</select>
 					</div>
 
