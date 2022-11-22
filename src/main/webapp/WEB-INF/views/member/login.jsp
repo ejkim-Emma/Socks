@@ -17,7 +17,7 @@
 	style="border: 1px solid black;">
 	<main>
 		<section>
-			<form method="post" action="/Socks/views/template.do">
+			<form method="POST" action="/Socks/views/loginok.do">
 				<!-- 브랜드 이름 -->
 				<div>
 					<div class="d-grid col-6 mb-3 mx-auto">
@@ -61,7 +61,7 @@
 		$.ajax ({
 			// 기본 타입은 GET
 			type: 'GET',
-			// url: 처음 만들 때 설정하는 /web location/ajax의 자바 루트
+			// url: 처음 만들 때 설정하는 /web location/ajax의 @WebServlet() 안에 내용
 			url: '/Socks/ajax/store.do',
 			// ajax.java에서 생성했던 String을 가져오는 것
 			data: 'Brand_ID=' + $(event.target).val(),
@@ -76,7 +76,7 @@
 				
 				// 결과가 나오면 그것을 each문으로 돌리겠다.
 				$(result).each(function (index, item) { // 데이터 = item
-					/* alert(JSON.stringify(item)); */
+					alert(JSON.stringify(item));
 				
 					$('#store').append('<option value="' + item.Store_ID + '">' + item.Description + '</option>')
 				});

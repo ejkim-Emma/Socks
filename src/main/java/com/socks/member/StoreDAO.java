@@ -8,7 +8,6 @@ import java.util.ArrayList;
 
 import com.socks.DBUtil;
 import com.socks.dto.brandDTO;
-import com.socks.dto.dutyfreeDTO;
 import com.socks.dto.storeDTO;
 
 public class StoreDAO {
@@ -126,6 +125,17 @@ public class StoreDAO {
 			e.getMessage();
 		}
 		
+		return null;
+	}
+
+	public storeDTO login(storeDTO dto) {
+		try {
+			
+		}
+		
+		catch(Exception e) {
+			
+		}
 		return null;
 	}
 
