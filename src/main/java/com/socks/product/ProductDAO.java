@@ -5,9 +5,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import com.socks.DBUtil;
-import com.socks.dto.brandDTO;
 import com.socks.dto.productDTO;
 
 public class ProductDAO {
@@ -23,25 +23,51 @@ public class ProductDAO {
 	}
 
 	// List.java > 목록
-	public ArrayList<productDTO> list() {
+	public ArrayList<productDTO> list(HashMap<String,String> map) {
 
 		try {
 
-			// 디비 열기
-			conn = DBUtil.open();
-			System.out.println("디비 열기");
+			//검색 관련
+			
+			// 일단 검색을 하려면 sql문에 where절이 붙어야 하기 때문에 where를 변수명으로 지정
+			// String where = "";
+			// System.out.println("where절 만들거예요.");
+			
+//			if (map.get("isSearch").equals("y")) {
+//				where = String.format("where product_name like '%%%s%%'"
+//										,map.get("product_name"));
+//			}
+			
+			
+			String sql = "select *\r\n" + 
+					"  from bbsupply_product \r\n" + 
+					" where ? is null or product_name = ?";
+			
+			
+			
+			
+			System.out.println("mapping" + map.get("product_name"));
+					
+			
 
 			// sql문 만들기
-			String sql = "select * from bbsupply_product";
-			System.out.println("sql문 작성");
+//			String sql = "select * from bbsupply_product";
+//			System.out.println("sql문 작성");
 
 			// sql 문 쓸거예요
-			stat = conn.createStatement();
+//			stat = conn.createStatement();
+			pstat = conn.prepareStatement(sql);
 			System.out.println("sql 명령어 사용");
 
+			pstat.setString(1, map.get("product_name"));
+			System.out.println("");
+			pstat.setString(2, map.get("product_name"));
+			// System.out.println("sql 쿼리" + pstat.toString());
+			
+			
 			// 커서는 sql에서 움직일 거예요.
 			// excuteQuery: select 할 때 사용
-			rs = stat.executeQuery(sql);
+			rs = pstat.executeQuery();
 			System.out.println("sql문에 커서 사용");
 
 			// 상품리스트를 담을 상자를 plist로 선언 > 상자들 자체를 배열로 만듬
@@ -50,30 +76,33 @@ public class ProductDAO {
 
 			// 커서 while 문을 통해 돌기
 			while (rs.next()) {
-
 				// System.out.println("커서 돌리기");
 				// 데이터 담을 상자를 만들게요
 				productDTO pdto = new productDTO();
 
 				// sql에서 받은 아이들을 스트링으로 형변환하면서 커서를 움직일 게요. > 그러면서 상자에 담을게요
 				pdto.setProduct_name(rs.getString("product_name"));
+				
 				pdto.setProduct_code(rs.getString("product_code"));
 				pdto.setProduct_size(rs.getString("product_size"));
 				pdto.setProduct_color(rs.getString("product_color"));
 				pdto.setUnit_price(rs.getString("unit_price"));
 
+				
 				// pdto 를 plist에 추가 할게요
 				plist.add(pdto);
 
 			}
-
+			System.out.println("1");
 			// 커서 닫기
 			rs.close();
+			System.out.println("2");
 			// sql문 사용 명령어 닫기
-			stat.close();
+			pstat.close();
+			System.out.println("3");
 			// 디비 연동 닫기
 			conn.close();
-
+			System.out.println("4");
 			return plist;
 
 		} catch (Exception e) {

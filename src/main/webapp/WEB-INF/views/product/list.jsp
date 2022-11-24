@@ -35,15 +35,15 @@
 						<div class="d-flex col-7 justify-content-between flex-wrap flex-md-nowrap align-items-center">
 							
 							<!-- 상품명 검색창 -->
-							<select name="product" class="form-select me-2">
+							<select name="product_name" class="form-select me-2">
 								<option value="" disabled selected>상품명</option>
 								<c:forEach items="${nlist}" var="nlist">
 									<option value="${nlist.product_name}">${nlist.product_name}</option>
 								</c:forEach>
 							</select>
 							
-							<!-- 사이즈 검색창 -->
-							<select name="size" class="form-select me-2">
+							<%-- <!-- 사이즈 검색창 -->
+							<select name="product_size" class="form-select me-2">
 								<option value="" disabled selected>사이즈</option>
 								<c:forEach items="${slist}" var="slist">
 									<option value="${slist.product_size}">${slist.product_size}</option>
@@ -51,12 +51,12 @@
 							</select>
 							
 							<!-- 색상 검색창 -->
-							<select name="color" class="form-select me-2">
+							<select name="product_color" class="form-select me-2">
 								<option value="" disabled selected>색상</option>
 								<c:forEach items="${clist}" var="clist">
 									<option value="${clist.product_color}">${clist.product_color}</option>
 								</c:forEach>
-							</select>
+							</select> --%>
 							
 							<!-- 검색버튼 -->
 							<button class="btn btn-primary">search</button>
