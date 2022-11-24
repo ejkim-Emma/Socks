@@ -17,7 +17,7 @@
 	style="border: 1px solid black;">
 	<main>
 		<section>
-			<form method="POST" action="/Socks/views/loginok.do">
+			<form method="POST" action="/Socks/member/loginok.do">
 				<!-- 브랜드 이름 -->
 				<div>
 					<div class="d-grid col-6 mb-3 mx-auto">
@@ -50,7 +50,7 @@
 
 				<!-- 로그인 버튼 -->
 				<div class="d-grid col-6 mb-3 mx-auto">
-					<button type="submit" class="btn btn-primary btn-block">Login</button>
+					<button class="btn btn-primary btn-block">Login</button>
 				</div>
 			</form>
 		</section>
@@ -76,7 +76,7 @@
 				
 				// 결과가 나오면 그것을 each문으로 돌리겠다.
 				$(result).each(function (index, item) { // 데이터 = item
-					alert(JSON.stringify(item));
+					// alert(JSON.stringify(item));
 				
 					$('#store').append('<option value="' + item.Store_ID + '">' + item.Description + '</option>')
 				});

@@ -40,7 +40,7 @@ public class StoreDAO {
 			ArrayList<brandDTO> blist = new ArrayList<brandDTO>();
 			// 리스트에 가져오는 열의 개수를 확인
 			// System.out.println("확인" + rs.getRow());
-			
+
 			while (rs.next()) {
 
 				// System.out.println("while 출력");
@@ -129,48 +129,63 @@ public class StoreDAO {
 	}
 
 	public storeDTO login(storeDTO dto) {
+
 		try {
 			
-		}
-		
-		catch(Exception e) {
+			String sql = "select Store_ID, Description from bbis_store where Store_ID = ?";
+			System.out.println("sql문 설정하기");
 			
+			pstat = conn.prepareStatement(sql);
+			pstat.setString(1, dto.getStore_ID());
+			
+			rs = pstat.executeQuery();
+			
+			if (rs.next()) {
+				
+				dto.setDescription(rs.getString("Description"));
+				
+				return dto;
+				
+			}
+			
+			
+		} catch (Exception e) {
+			System.out.println("세션 데이터 상자에 넣기");
+			e.printStackTrace();
 		}
 		return null;
 	}
 
-	// 매장 리스트
+	public storeDTO get(String Store_ID) {
 
-	/*
-	 * public ArrayList<dutyfreeDTO> dutylist() { try {
-	 * 
-	 * conn = DBUtil.open();
-	 * 
-	 * // sql문을 'sql'이라는 변수명 안에 담기 String sql =
-	 * "select DF_Store_ID, Description, location_code from bbis_dutyfree;";
-	 * 
-	 * 
-	 * stat = conn.createStatement();
-	 * 
-	 * // 'sql' 변수명을 사용할 꺼야 rs = stat.executeQuery(sql);
-	 * 
-	 * ArrayList<dutyfreeDTO> dlist = new ArrayList<dutyfreeDTO>();
-	 * 
-	 * while (rs.next()) {
-	 * 
-	 * dutyfreeDTO ddto = new dutyfreeDTO();
-	 * 
-	 * ddto.setDF_Store_ID(rs.getString("DF_Store_ID"));
-	 * ddto.setDescription(rs.getString("Description"));
-	 * 
-	 * dlist.add(ddto); }
-	 * 
-	 * rs.close(); stat.close(); conn.close();
-	 * 
-	 * return dlist;
-	 * 
-	 * } catch (Exception e) { System.out.println("duty_free 오류입니다.");
-	 * e.printStackTrace(); } return null; }
-	 */
+		try {
+			String sql = "select * from bbis_store where Store_ID = ?";
+			System.out.println("sql문을 생성했는가?");
+			
+			pstat = conn.prepareStatement(sql);
+			pstat.setString(1, Store_ID);
+			System.out.println("sql문 생성한 것에 파라미터를 넣었는가?");
+			
+			rs = pstat.executeQuery();
+			
+			storeDTO dto = new storeDTO();
+			System.out.println("아래 if 문에 사용할 dto를 만들었는 가?");
+						
+			if (rs.next()) {
+				
+				//로그인 성공
+				dto.setStore_ID(Store_ID);
+				dto.setDescription(rs.getString("Description"));
+				
+				return dto;
+			} 
+			
+		} catch (Exception e) {
+			System.out.println("스토어아이디를 where 로 걸었을 때 정보 가져오기 실패");
+			e.printStackTrace();
+		}
+		return null;
+	}
+
 
 }

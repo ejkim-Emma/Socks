@@ -11,7 +11,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.socks.dto.brandDTO;
-import com.socks.dto.storeDTO;
 
 @WebServlet("/member/login.do")
 public class Login extends HttpServlet {
