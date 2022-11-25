@@ -38,18 +38,14 @@ public class ProductDAO {
 //										,map.get("product_name"));
 //			}
 			
-			
 			String sql = "select *\r\n" + 
-					"  from bbsupply_product \r\n" + 
-					" where ? is null or product_name = ?";
+					"  from bbsupply_product\r\n" + 
+					" where ? is null or product_name = ?\r\n" + 
+					"   and (? is null or product_size = ?)\r\n" + 
+					"   and (? is null or product_color = ?)";
 			
-			
-			
-			
-			System.out.println("mapping" + map.get("product_name"));
+//			System.out.println("mapping" + map.get("product_name"));
 					
-			
-
 			// sql문 만들기
 //			String sql = "select * from bbsupply_product";
 //			System.out.println("sql문 작성");
@@ -57,22 +53,24 @@ public class ProductDAO {
 			// sql 문 쓸거예요
 //			stat = conn.createStatement();
 			pstat = conn.prepareStatement(sql);
-			System.out.println("sql 명령어 사용");
+//			System.out.println("sql 명령어 사용");
 
 			pstat.setString(1, map.get("product_name"));
-			System.out.println("");
 			pstat.setString(2, map.get("product_name"));
+			pstat.setString(3, map.get("product_size"));
+			pstat.setString(4, map.get("product_size"));
+			pstat.setString(5, map.get("product_color"));
+			pstat.setString(6, map.get("product_color"));
 			// System.out.println("sql 쿼리" + pstat.toString());
-			
 			
 			// 커서는 sql에서 움직일 거예요.
 			// excuteQuery: select 할 때 사용
 			rs = pstat.executeQuery();
-			System.out.println("sql문에 커서 사용");
+//			System.out.println("sql문에 커서 사용");
 
 			// 상품리스트를 담을 상자를 plist로 선언 > 상자들 자체를 배열로 만듬
 			ArrayList<productDTO> plist = new ArrayList<productDTO>();
-			System.out.println("상자들을 배열로 만들기");
+//			System.out.println("상자들을 배열로 만들기");
 
 			// 커서 while 문을 통해 돌기
 			while (rs.next()) {
@@ -93,16 +91,13 @@ public class ProductDAO {
 				plist.add(pdto);
 
 			}
-			System.out.println("1");
 			// 커서 닫기
 			rs.close();
-			System.out.println("2");
 			// sql문 사용 명령어 닫기
 			pstat.close();
-			System.out.println("3");
 			// 디비 연동 닫기
 			conn.close();
-			System.out.println("4");
+			
 			return plist;
 
 		} catch (Exception e) {

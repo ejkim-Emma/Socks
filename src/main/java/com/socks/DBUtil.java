@@ -19,13 +19,13 @@ public class DBUtil {
 
 			conn = DriverManager.getConnection(url, id, pw);
 
-			System.out.println("디비 연결 성공");
+//			System.out.println("디비 연결 성공");
 
 			return conn;
 		}
 
 		catch (Exception e) {
-			System.out.println("디비 연결 오류");
+//			System.out.println("디비 연결 오류");
 			e.printStackTrace();
 		}
 

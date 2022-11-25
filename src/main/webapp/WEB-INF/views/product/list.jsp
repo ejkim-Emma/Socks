@@ -42,7 +42,7 @@
 								</c:forEach>
 							</select>
 							
-							<%-- <!-- 사이즈 검색창 -->
+							<!-- 사이즈 검색창 -->
 							<select name="product_size" class="form-select me-2">
 								<option value="" disabled selected>사이즈</option>
 								<c:forEach items="${slist}" var="slist">
@@ -56,7 +56,7 @@
 								<c:forEach items="${clist}" var="clist">
 									<option value="${clist.product_color}">${clist.product_color}</option>
 								</c:forEach>
-							</select> --%>
+							</select>
 							
 							<!-- 검색버튼 -->
 							<button class="btn btn-primary">search</button>

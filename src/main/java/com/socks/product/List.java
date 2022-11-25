@@ -33,8 +33,8 @@ public class List extends HttpServlet {
 
 		// 파라미터로 검색한 것들 받아서 가져와서 스트링으로 만들기
 		String product_name = req.getParameter("product_name");
-//		String product_size = req.getParameter("product_size");
-//		String product_color = req.getParameter("product_color");
+		String product_size = req.getParameter("product_size");
+		String product_color = req.getParameter("product_color");
 
 		// 검색을 하고 있는 지 안하고 있는 지 구분하는 변수 하나 만들기
 		// 기본 디폴트는 'n'으로 하여 그냥 목록인것으로 설정하기
@@ -43,7 +43,7 @@ public class List extends HttpServlet {
 		// 검색하는 지 안하는 지 구분하는 if문 사용하기
 
 		// 검색하지 않을 때
-		if ((product_name == null) || (product_name == "")) {
+		if ((product_name == null && product_size == null && product_color == null) || (product_name == "" && product_size == "" && product_color == "")) {
 			isSearch = "n";
 		} else {
 			// 검색하고 있을 때
@@ -55,8 +55,8 @@ public class List extends HttpServlet {
 
 		// HashMap 값 추가
 		map.put("product_name", product_name);
-//		map.put("product_size", product_size);
-//		map.put("product_color", product_color);
+		map.put("product_size", product_size);
+		map.put("product_color", product_color);
 		map.put("isSearch", isSearch);
 
 		// -----------------------------------------------------------------------------------
