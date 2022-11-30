@@ -37,7 +37,7 @@
 						<span>총무과</span>
 					</h6>
 					<ul class="nav flex-column">
-						<li class="nav-item"><a class="nav-link" href="/Socks/product/lsit.do"> > <span
+						<li class="nav-item"><a class="nav-link" href="/Socks/product/list.do"> > <span
 								data-feather="home" class="align-text-bottom"></span> 양말 품목 관리
 						</a></li>
 						<li class="nav-item"><a class="nav-link" href="/Socks/period/list.do"> > <span
@@ -55,7 +55,7 @@
 					</h6>
 					<ul class="nav flex-column">
 						<li class="nav-item"><a class="nav-link" aria-current="page"
-							asp-controller="Home" asp-action="양말오더"> > <span
+							href="/Socks/dutyfree/list.do"> > <span
 								data-feather="file-text" class="align-text-bottom"></span> 양말 오더
 						</a></li>
 					</ul>

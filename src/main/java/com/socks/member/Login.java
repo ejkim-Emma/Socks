@@ -22,10 +22,8 @@ public class Login extends HttpServlet {
 		
 		// 브랜드와 매장 관련 DAO
 		StoreDAO dao = new StoreDAO();
-		
 		// 브랜드 상자 배열
 		ArrayList<brandDTO> brandlist = new ArrayList<brandDTO>();
-		
 		// StoreDAO에서 만든 리스트를 가져온다.
 		brandlist = dao.brandlist();
 		// System.out.println("브랜드 리스트 담기");
@@ -33,7 +31,7 @@ public class Login extends HttpServlet {
 		// set으로 넘겨서 jsp에 뿌릴 수 있도록 하는 것
 		req.setAttribute("brandlist", brandlist);
 		
-		RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/views/member/login.jsp");
+		RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/views/member/login.jsp"); 
 		dispatcher.forward(req, resp);
 
 	}

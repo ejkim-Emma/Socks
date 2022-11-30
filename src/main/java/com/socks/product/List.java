@@ -25,6 +25,9 @@ public class List extends HttpServlet {
 	}
 
 	private void doTemp(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		// 1. 세션을 가져오기
+		HttpSession session = req.getSession();
+		System.out.println(session);
 
 		// (5) 검색조건을 가지고 데이터 고르기
 
@@ -43,12 +46,36 @@ public class List extends HttpServlet {
 		// 검색하는 지 안하는 지 구분하는 if문 사용하기
 
 		// 검색하지 않을 때
-		if ((product_name == null && product_size == null && product_color == null) || (product_name == "" && product_size == "" && product_color == "")) {
+		if ((product_name == null && product_size == null && product_color == null)
+				|| (product_name == "" && product_size == "" && product_color == "")) {
 			isSearch = "n";
 		} else {
 			// 검색하고 있을 때
 			isSearch = "y";
+
 		}
+
+		// -----------------------------------------------------------------------------------
+
+		/*
+		 * // 1. 세션을 가져오기 HttpSession session = req.getSession();
+		 * System.out.println(session);
+		 * 
+		 * // HashMap 선언 HashMap<String, String> map = new HashMap<String, String>();
+		 * 
+		 * // HashMap 값 추가 map.put("product_name", product_name);
+		 * map.put("product_size", product_size); map.put("product_color",
+		 * product_color); map.put("isSearch", isSearch);
+		 * 
+		 * // (1) 목록리스트 조회하기 // 2. ProductDAO 안에서 불러온 데이터를 가공하기 위해 ProductDAO를 'dao'로
+		 * 변수를 선언한다. ProductDAO dao = new ProductDAO();
+		 * 
+		 * // ArrayList<productDTO>를 'list'라고 메소드 붙이기 ArrayList<productDTO> list =
+		 * dao.list(map);
+		 * 
+		 * // jsp에 ArrayList<productDTO>를 통째로 넘기기 위해 setAttribute 사용
+		 * req.setAttribute("list", list);
+		 */
 
 		// HashMap 선언
 		HashMap<String, String> map = new HashMap<String, String>();
@@ -59,32 +86,24 @@ public class List extends HttpServlet {
 		map.put("product_color", product_color);
 		map.put("isSearch", isSearch);
 
-		// -----------------------------------------------------------------------------------
-		
-		// 1. 세션을 가져오기
-		HttpSession session = req.getSession();
-		System.out.println(session);
-
 		// (1) 목록리스트 조회하기
 		// 2. ProductDAO 안에서 불러온 데이터를 가공하기 위해 ProductDAO를 'dao'로 변수를 선언한다.
 		ProductDAO dao = new ProductDAO();
-		System.out.println("dao 변수 만들기");
 
 		// ArrayList<productDTO>를 'list'라고 메소드 붙이기
 		ArrayList<productDTO> list = dao.list(map);
-		System.out.println("배열 상자를 dao에서 가공");
 
 		// jsp에 ArrayList<productDTO>를 통째로 넘기기 위해 setAttribute 사용
 		req.setAttribute("list", list);
-		System.out.println("상자 이름 짓기");
+
+		/* ProductDAO dao = new ProductDAO(); */
 
 		// (2) 검색조건의 이름만 가져오기
-		ProductDAO ndao = new ProductDAO();
+		/* ProductDAO ndao = new ProductDAO(); */
 
-		ArrayList<productDTO> nlist = ndao.nlist();
+		ArrayList<productDTO> nlist = dao.nlist();
 
 		req.setAttribute("nlist", nlist);
-
 		// (3) 검색조건의 사이즈만 가져오기
 		ProductDAO sdao = new ProductDAO();
 
