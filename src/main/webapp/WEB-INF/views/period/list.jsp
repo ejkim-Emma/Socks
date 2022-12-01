@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -34,8 +35,8 @@
 				<div></div>
 				<div>
 					<a class="btn btn-warning" href="/Socks/period/add.do">항목 추가</a>
-					<button type="button" class="btn btn-outline-success btn-block"
-						asp-controller="Home" asp-action="양말품목관리">저장</button>
+					<!-- <button type="button" class="btn btn-outline-success btn-block"
+						asp-controller="Home" asp-action="양말품목관리">저장</button> -->
 				</div>
 			</div>
 			<div class="table-scroll"
@@ -43,26 +44,65 @@
 				<table class="table table-bordered" id="update">
 					<thead>
 						<tr>
-							<th scope="col" style="width: 15%;">Order_No</th>
-							<th scope="col" style="width: 35%;">신청기간</th>
+							<th scope="col" style="width: 10%;">Order_No</th>
+							<th scope="col" style="width: 25%;">신청기간</th>
 							<th scope="col" style="width: 25%;">신청시작일</th>
 							<th scope="col" style="width: 25%;">신청종료일</th>
+							<th scope="col" style="width: 15%;">삭제 / 수정</th>
 						</tr>
 					</thead>
 					<tbody>
 						<c:forEach items="${list}" var="list">
+						<c:set var="num" value="${list.due_ID}"/>
 							<tr>
-								<td>${list.due_ID}</td>
+								<td>${fn:substring(num,8,10)}</td>
 								<td>${list.period}</td>
 								<td>${list.sta_Date}</td>
 								<td>${list.closing_Date}</td>
+								<th><input type="button" value="삭제" data-bs-toggle="modal"
+									data-bs-target="#del" data-bs-code="${list.due_ID}"> /
+									<input type="button" value="수정"
+									onclick="location.href='/Socks/period/edit.do?due_ID=${list.due_ID}&year=${list.year}&month=${list.month}&start=${list.sta_Date}&end=${list.closing_Date}'">
+								</th>
 							</tr>
 						</c:forEach>
 					</tbody>
 				</table>
+				<div class="modal fade" id="del" tabindex="-1"
+						aria-labelledby="exampleModalLabel" aria-hidden="true">
+						<div class="modal-dialog modal-sm">
+							<div class="modal-content">
+								<div class="modal-header">
+									<button type="button" class="btn-close" data-bs-dismiss="modal"
+										aria-label="Close"></button>
+								</div>
+								<div class="modal-body">저장하시겠습니까?</div>
+								<div class="modal-footer">
+									<button type="button" class="btn btn-secondary"
+										data-bs-dismiss="modal">취소</button>
+									<button class="btn btn-outline-success btn-block" id="save"
+										onclick="del();">저장</button>
+
+								</div>
+							</div>
+						</div>
+					</div>
 			</div>
 		</div>
-		<script src="~/js/UpDel.js"></script>
+		<script>
+			var CODE = "";
+
+			$(document).ready(function() {
+				$('#del').on('show.bs.modal', function(event) {
+					CODE = $(event.relatedTarget).data('bs-code');
+				});
+			});
+
+			function del() {
+				var save = $('#save').val();
+				location.href = '/Socks/period/delok.do?due_ID=' + CODE
+			}
+		</script>
 	</main>
 </body>
 </html>

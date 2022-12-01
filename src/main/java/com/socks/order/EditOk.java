@@ -24,10 +24,6 @@ public class EditOk extends HttpServlet {
 		String product_code = req.getParameter("product_code");
 		String product_qty = req.getParameter("product_qty");
 		String order_id = req.getParameter("order_id");
-		System.out.println("스토어 아이디: " + store);
-		System.out.println("기간: " + period);
-		System.out.println("상품코드 : " + product_code);
-		System.out.println("수량: " + product_qty);
 		
 		orderDTO dto = new orderDTO();
 		

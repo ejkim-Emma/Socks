@@ -82,7 +82,6 @@ public class OrderDAO {
 				ordto.setStore_id(rs.getString("store_id"));
 				ordto.setProduct_code(rs.getString("Product_code"));
 				ordto.setPeriod(rs.getString("period"));
-				System.out.println("상자 안에 담겼는가?"+ ordto);
 
 				orlist.add(ordto);
 
