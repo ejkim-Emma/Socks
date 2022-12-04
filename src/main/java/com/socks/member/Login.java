@@ -22,6 +22,7 @@ public class Login extends HttpServlet {
 		// 셀렉트 박스 목록 띄우기
 		
 		// 브랜드와 매장 관련 DAO
+		
 		StoreDAO dao = new StoreDAO();
 		// 브랜드 상자 배열
 		ArrayList<brandDTO> brandlist = new ArrayList<brandDTO>();
@@ -38,3 +39,4 @@ public class Login extends HttpServlet {
 	}
 
 }
+

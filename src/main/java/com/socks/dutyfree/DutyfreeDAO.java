@@ -69,7 +69,7 @@ public class DutyfreeDAO {
 	public ArrayList<qtyDTO> list(HashMap<String, String> per) {
 		try {
 
-			String sql = "select pr.product_name, pr.product_size, pr.product_color, od.Product_Qty, st.Store_ID\r\n"
+			String sql = "select od.Order_ID, pr.product_name, pr.product_size, pr.product_color,pr.order_unit, od.Product_Qty, st.Store_ID\r\n"
 					+ "  from bbsupply_order od\r\n" + " inner join bbis_store st\r\n"
 					+ "    on od.Store_ID = st.Store_ID\r\n" + " inner join bbsupply_order_due odu\r\n"
 					+ "    on od.Due_ID = odu.Due_ID\r\n" + "  inner join bbsupply_product pr\r\n"
@@ -89,12 +89,15 @@ public class DutyfreeDAO {
 
 				qtyDTO dto = new qtyDTO();
 
+				dto.setOrder_id(Integer.parseInt(rs.getString("order_id")));
+				
 				dto.setProduct_name(rs.getString("product_name"));
-				;
+				
 				dto.setProduct_size(rs.getString("product_size"));
 				dto.setProduct_qty(rs.getString("product_qty"));
 				dto.setProduct_color(rs.getString("product_color"));
-
+				dto.setOrder_unit(Integer.parseInt(rs.getString("order_unit")));
+				
 				qlist.add(dto);
 
 			}

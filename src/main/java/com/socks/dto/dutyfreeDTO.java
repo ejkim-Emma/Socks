@@ -17,6 +17,8 @@ public class dutyfreeDTO {
 	
 	private String store;
 	private String product;
+	
+	private int order_unit;
 		
 	
 }
