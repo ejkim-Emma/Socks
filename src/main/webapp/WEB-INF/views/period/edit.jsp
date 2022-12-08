@@ -51,7 +51,7 @@
 										</c:forEach>
 									</select> <label class="col-1 col-form-label text-center">년</label> <select
 										class="form-select w-50" name="month" required>
-										<option value="" disabled selected>${edit.month}</option>
+										<option value="${edit.month}" disabled selected>${edit.month}</option>
 										<c:forEach items="${mlist}" var="mlist">
 											<option value="${mlist.month}">${mlist.month}</option>
 										</c:forEach>
@@ -68,7 +68,7 @@
 								required></td>
 						</tr>
 					</table>
-					<input type="text" value="${edit.due_id}" name="due_ID" />
+					<input type="hidden" value="${edit.due_id}" name="due_ID" />
 				</form>
 			</main>
 		</section>

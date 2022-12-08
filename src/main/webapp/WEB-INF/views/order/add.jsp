@@ -28,7 +28,7 @@
 							style="width: 15%">brand</th>
 						<td colspan="5"><select name="brand" id="brand"
 							class="form-select" onchange="brandChange(this)" required>
-								<option value="" disabled selected>Brand_name</option>
+								<option value="" disabled selected>브랜드</option>
 								<c:forEach items="${brandlist}" var="brandlist">
 									<option value="${brandlist.brand_ID}">${brandlist.description}</option>
 								</c:forEach>

@@ -37,7 +37,7 @@
 					<div class="d-grid col-6 mb-3 mx-auto">
 						<label for="formFile" class="form-label">매장</label>
 						<select name="store" id="store"  class="form-select" required>
-							<option value="" disabled selected>Location_Name</option>
+							<option value="" disabled selected>Store_Name</option>
 						</select>
 					</div>
 				</div>

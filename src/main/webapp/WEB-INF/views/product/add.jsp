@@ -63,6 +63,12 @@
 						<input type="number" name="price" id="number" onkeyup="inputNumberFormat(this)" style="width: 20%" class="form-control" maxlength="10" placeholder="숫자를 입력하세요" required>
 						</td>
 					</tr>
+					<tr>
+						<th class="table-active align-middle text-center">항목 당 수량</th>
+						<td colspan="4">
+						<input type="number" name="order_unit" id="number" onkeyup="inputNumberFormat(this)" style="width: 20%" class="form-control" maxlength="10" placeholder="숫자를 입력하세요" required>
+						</td>
+					</tr>
 				</table>
 			</form>
 		</div>

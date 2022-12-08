@@ -1,5 +1,7 @@
 package com.socks.dto;
 
+import java.util.Date;
+
 import lombok.Data;
 
 @Data
@@ -9,6 +11,8 @@ public class dutyfreeDTO {
 	
 	private String due_id;
 	private String period;
+	private Date closing_date;
+	private String day;
 	
 	private String product_name;
 	private String product_size;
@@ -19,6 +23,5 @@ public class dutyfreeDTO {
 	private String product;
 	
 	private int order_unit;
-		
 	
 }

@@ -14,15 +14,20 @@
 	</main>
 
 	<script>
-		alert('세션 검사를 하나?');
+		/* alert('세션 검사를 하나?'); */
 
-		<c:if test="${not empty auth}">
-		alert('if문을 이용하나?');
+		<c:choose>
+		<c:when test="${auth eq 'ST999999'}">
+		/* alert('if문을 이용하나?'); */
 		location.href = '/Socks/product/list.do';
-		</c:if>
-		
+		</c:when>
+		<c:when test="${not empty auth}">
+		/* alert('if문을 이용하나?'); */
+		location.href = '/Socks/dutyfree/list.do';
+		</c:when>
+		</c:choose>
 		<c:if test="${empty auth}">
-		alert('failed');
+		/* alert('failed'); */
 		</c:if>
 	</script>
 </body>

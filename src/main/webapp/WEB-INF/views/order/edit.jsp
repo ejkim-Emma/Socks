@@ -27,7 +27,7 @@
 						<th class="table-active align-middle text-center"
 							style="width: 15%">brand</th>
 						<td colspan="5"><select name="brand" id="brand"
-							class="form-select" onchange="brandChange(this)" required>
+							class="form-select" onchange="brandChange(this)">
 								<option value="" disabled selected>${oredit.brand_name}</option>
 								<c:forEach items="${brandlist}" var="brandlist">
 									<option value="${brandlist.brand_ID}">${brandlist.description}</option>
@@ -37,7 +37,7 @@
 					<tr>
 						<th class="table-active align-middle text-center">매장</th>
 						<th colspan="5"><select name="store" id="store"
-							class="form-select" required>
+							class="form-select">
 								<option value="" disabled selected>${oredit.store_name}</option>
 						</select></th>
 					</tr>
@@ -66,7 +66,7 @@
 						<th class="table-active align-middle text-center">합계: 수량</th>
 						<td colspan="4"><input type="number" name="product_qty"
 							id="product_qty" style="width: 20%" class="form-control"
-							maxlength="10" value="${oredit.product_qty}" required></td>
+							maxlength="10" value="${oredit.product_qty}"></td>
 					</tr>
 				</table>
 				<input type="hidden" value="${oredit.order_id}" name="order_id" />

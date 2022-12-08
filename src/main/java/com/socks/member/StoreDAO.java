@@ -30,7 +30,7 @@ public class StoreDAO {
 
 			conn = DBUtil.open();
 			
-			String sql = "select Brand_ID, Description, Brand_code from bbis_brand";
+			String sql = "select Brand_ID, Description, Brand_code from bbis_brand where Brand_ID like '%BR%'";
 
 			stat = conn.createStatement();
 
@@ -133,7 +133,7 @@ public class StoreDAO {
 		try {
 			
 			String sql = "select Store_ID, Description from bbis_store where Store_ID = ?";
-			System.out.println("sql문 설정하기");
+			// System.out.println("sql문 설정하기");
 			
 			pstat = conn.prepareStatement(sql);
 			pstat.setString(1, dto.getStore_ID());

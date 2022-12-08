@@ -23,7 +23,7 @@ public class LoginOk extends HttpServlet {
 		
 		// 'store' 이라는 변수 생성해서 파라미터로 받았다.
 		String store = req.getParameter("store");
-		System.out.println("변수를 파라미터로 받기");
+		// System.out.println("변수를 파라미터로 받기");
 		
 		// DTO에 변수명을 달아서 새로운 상자를 생성
 		storeDTO dto = new storeDTO();
@@ -35,7 +35,7 @@ public class LoginOk extends HttpServlet {
 		StoreDAO dao = new StoreDAO();
 		
 		storeDTO result = dao.login(dto);
-		System.out.println("dao안에서 프로그래밍하기");
+		// System.out.println("dao안에서 프로그래밍하기");
 		
 		if (result != null) {
 			

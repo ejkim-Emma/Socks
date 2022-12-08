@@ -9,12 +9,12 @@
 <title>SocksOrder</title>
 <%@ include file="/WEB-INF/views/inc/asset.jsp"%>
 <style>
-.table-scroll {
+.table-wrapper {
 	overflow: auto;
 	text-align: center;
 }
 
-.table-scroll thead th {
+.table-wrapper thead th {
 	background: #859395;
 	color: #fff;
 	position: sticky;
@@ -39,16 +39,16 @@
 						asp-controller="Home" asp-action="양말품목관리">저장</button> -->
 				</div>
 			</div>
-			<div class="table-scroll"
-				style="height: 76.1%; overflow-x: hidden; overflow-y: auto;">
+			<div class="table-wrapper"
+				style="overflow-y: auto; border-collapse: collapse; height: 500px; padding-top: 0px;">
 				<table class="table table-bordered" id="update">
 					<thead>
 						<tr>
-							<th scope="col" style="width: 10%;">Order_No</th>
+							<th scope="col" style="width: 5%;">No</th>
 							<th scope="col" style="width: 25%;">신청기간</th>
 							<th scope="col" style="width: 25%;">신청시작일</th>
 							<th scope="col" style="width: 25%;">신청종료일</th>
-							<th scope="col" style="width: 15%;">삭제 / 수정</th>
+							<th scope="col" style="width: 20%;">삭제 / 수정</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -59,9 +59,9 @@
 								<td>${list.period}</td>
 								<td>${list.sta_Date}</td>
 								<td>${list.closing_Date}</td>
-								<th><input type="button" value="삭제" data-bs-toggle="modal"
+								<th><input type="submit" value="삭제" data-bs-toggle="modal"
 									data-bs-target="#del" data-bs-code="${list.due_ID}"> /
-									<input type="button" value="수정"
+									<input type="submit" value="수정"
 									onclick="location.href='/Socks/period/edit.do?due_ID=${list.due_ID}&year=${list.year}&month=${list.month}&start=${list.sta_Date}&end=${list.closing_Date}'">
 								</th>
 							</tr>

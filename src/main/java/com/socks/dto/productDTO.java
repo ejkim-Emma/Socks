@@ -16,4 +16,6 @@ public class productDTO {
 	// 가격
 	private String unit_price;
 	
+	private int order_unit;
+	
 }

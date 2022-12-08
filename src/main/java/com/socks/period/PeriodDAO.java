@@ -108,10 +108,13 @@ public class PeriodDAO {
 
 			conn = DBUtil.open();
 
-			String sql = "insert into bbsupply_order_due (Due_ID, Period, Year, Month, Sta_Date, Closing_Date) \r\n"
-					+ "values ((select concat(left(num, 6), convert(nvarchar(50), format(convert(int, RIGHT(num,4) + 1), '0000'))) \r\n"
-					+ "	       from (select max(Due_ID) as num  from bbsupply_order_due) as bk), \r\n"
-					+ "		 CONCAT(?, '년',?, '월(',?+1,'~',?+2,'월분)'), ?, ?, ?, ?)";
+			String sql = "insert into bbsupply_order_due (Due_ID, Period, Year, Month, Sta_Date, Closing_Date) \r\n" + 
+					"values ((select concat(left(num, 6), convert(nvarchar(50), format(convert(int, RIGHT(num,4) + 1), '0000')))\r\n" + 
+					"	       from (select max(Due_ID) as num \r\n" + 
+					"				   from bbsupply_order_due) as bk), CONCAT(?, '년',?, '월(',\r\n" + 
+					"						case when ?=12 then 0 \r\n" + 
+					"						else ? end +1,'~',\r\n" + 
+					"						case when ?=12 then 0 else ? end +2,'월분)'), ?, ?, ?, ?)";
 
 			// concat은 문자열과 숫자를 더할 때 쓴다. '+'도 마찬가지 이나 문자 문자 / 숫자 숫자 만 가능할 뿐 문자 숫자는 안된다.
 
@@ -122,11 +125,14 @@ public class PeriodDAO {
 			pstat.setInt(2, dto.getMonth());
 			pstat.setInt(3, dto.getMonth());
 			pstat.setInt(4, dto.getMonth());
-
-			pstat.setInt(5, dto.getYear());
+			pstat.setInt(5, dto.getMonth());
 			pstat.setInt(6, dto.getMonth());
-			pstat.setString(7, dto.getSta_Date());
-			pstat.setString(8, dto.getClosing_Date());
+			
+
+			pstat.setInt(7, dto.getYear());
+			pstat.setInt(8, dto.getMonth());
+			pstat.setString(9, dto.getSta_Date());
+			pstat.setString(10, dto.getClosing_Date());
 
 			return pstat.executeUpdate();
 
@@ -141,8 +147,8 @@ public class PeriodDAO {
 	public int edit(periodDTO dto) {
 		try {
 
-			String sql = "update bbsupply_order_due set Period = CONCAT(?, '년',?, '월(',?+1,'~',?+2,'월분)'), Year = ?, Month\r\n"
-					+ " = ?, Sta_Date = ?, Closing_Date = ? where Due_ID = ?";
+			String sql = "update bbsupply_order_due set Period = CONCAT(?, '년',?, '월(',case when ?=12 then 0 else ? end +1,'~',case when ?=12 then 0 else ? end +2,'월분)'), Year = ?, Month\r\n" + 
+					"					 = ?, Sta_Date = ?, Closing_Date = ? where Due_ID = ?";
 
 			pstat = conn.prepareStatement(sql);
 
@@ -152,12 +158,15 @@ public class PeriodDAO {
 			pstat.setInt(3, dto.getMonth());
 			pstat.setInt(4, dto.getMonth());
 			
-			pstat.setInt(5, dto.getYear());
+			pstat.setInt(5, dto.getMonth());
 			pstat.setInt(6, dto.getMonth());
-			pstat.setString(7, dto.getSta_Date());
-			pstat.setString(8, dto.getClosing_Date());
-
-			pstat.setString(9, dto.getDue_ID());
+			
+			pstat.setInt(7, dto.getYear());
+			pstat.setInt(8, dto.getMonth());
+			
+			pstat.setString(9, dto.getSta_Date());
+			pstat.setString(10, dto.getClosing_Date());
+			pstat.setString(11, dto.getDue_ID());
 
 			return pstat.executeUpdate();
 

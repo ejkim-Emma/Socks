@@ -39,7 +39,7 @@ public class ProductDAO {
 //			}
 
 			String sql = "select *\r\n" + "  from bbsupply_product\r\n" + " where (? is null or product_name = ?)\r\n"
-					+ "   and (? is null or product_size = ?)\r\n" + "   and (? is null or product_color = ?)";
+					+ "   and (? is null or product_size = ?)\r\n" + "   and (? is null or product_color = ?) order by product_name asc";
 
 //			System.out.println("mapping" + map.get("product_name"));
 
@@ -82,6 +82,7 @@ public class ProductDAO {
 				pdto.setProduct_size(rs.getString("product_size"));
 				pdto.setProduct_color(rs.getString("product_color"));
 				pdto.setUnit_price(rs.getString("unit_price"));
+				pdto.setOrder_unit(rs.getInt("order_unit"));
 
 				// pdto 를 plist에 추가 할게요
 				plist.add(pdto);
@@ -225,7 +226,7 @@ public class ProductDAO {
 	public int add(productDTO dto) {
 		try {
 
-			String sql = "insert into bbsupply_product (product_name, product_size, product_code, product_color, unit_price) values (?, ?, ?, ?, ?)";
+			String sql = "insert into bbsupply_product (product_name, product_size, product_code, product_color, unit_price, order_unit) values (?, ?, ?, ?, ?, ?)";
 
 			pstat = conn.prepareStatement(sql);
 
@@ -234,6 +235,7 @@ public class ProductDAO {
 			pstat.setString(3, dto.getProduct_code());
 			pstat.setString(4, dto.getProduct_color());
 			pstat.setString(5, dto.getUnit_price());
+			pstat.setInt(6, dto.getOrder_unit());
 
 			return pstat.executeUpdate();
 

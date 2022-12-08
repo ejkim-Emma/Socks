@@ -25,7 +25,7 @@ public class Edit extends HttpServlet {
 		// 1. 데이터 가져오기
 		String pCode = req.getParameter("product_code");
 		String pName = req.getParameter("product_name");
-		System.out.println("상품명입니다." + pName);
+		// System.out.println("상품명입니다." + pName);
 		String pSize = req.getParameter("product_size");
 		String pColor = req.getParameter("product_color");
 		String pPrice = req.getParameter("unit_price");

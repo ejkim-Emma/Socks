@@ -2,7 +2,11 @@ package com.socks.dutyfree;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 
 import javax.servlet.RequestDispatcher;
@@ -28,17 +32,22 @@ public class List extends HttpServlet {
 		req.getParameter("UTF-8");
 
 		String id = (String) session.getAttribute("auth");
-		System.out.println("session을 아이디로 가져오기: " + id);
 		String period = req.getParameter("period");
+		/* String day = req.getParameter("day"); */
+		
+		/* System.out.println("데이를 받아오나?" + day); */
+
 
 		if ((period == null) || (period == "")) {
 
 		} else {
+			
 			HashMap<String, String> per = new HashMap<String, String>();
+			
 			per.put("store_id", id);
 			per.put("due_id", period);
-
-			System.out.println(per);
+			/* per.put("day", day); */
+			/* System.out.println("day가 들어갔나?: "+per.put("day", day)); */
 
 			DutyfreeDAO dao = new DutyfreeDAO();
 
@@ -57,10 +66,9 @@ public class List extends HttpServlet {
 
 		// 월분 리스트 가져오기
 		ArrayList<dutyfreeDTO> plist = dao.plist();
-
 		req.setAttribute("plist", plist);
 
-		System.out.println("doGet");
+		// System.out.println("doGet");
 
 		RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/views/dutyfree/list.jsp");
 		dispatcher.forward(req, resp);
@@ -72,8 +80,10 @@ public class List extends HttpServlet {
 
 		req.setCharacterEncoding("UTF-8");
 
-		int wrong = Integer.parseInt((req.getParameter("wrong"))); //
-		System.out.println("신청인원" + wrong);
+		// int due_id = req.getParameter("due_id");
+
+		int wrong = Integer.parseInt(req.getParameter("wrong"));
+
 		if (wrong < 0) {
 			System.out.println("실패");
 			resp.setContentType("text/html; charset=utf-8");
@@ -83,11 +93,111 @@ public class List extends HttpServlet {
 			out.write("</script></head></html>");
 			out.flush();
 		} else {
-			System.out.println("성공");
+			/*
+			 * System.out.println("성공"); // 배열에 담기
+			 * 
+			 * String[] input = (req.getParameterValues("input"));
+			 * 
+			 * for (int i = 0; i < input.length; i++) { System.out.println("배열 출력" +
+			 * input[0]); }
+			 * 
+			 * qtyDTO dto = new qtyDTO();
+			 * 
+			 * dto.setData(input);
+			 * 
+			 * DutyfreeDAO dao = new DutyfreeDAO();
+			 */
+
+			/*
+			 * String[] result = dao.edit(dto);
+			 * 
+			 * req.setAttribute("result", result);
+			 */
+
+			/*
+			 * Enumeration<String> enu = req.getParameterNames();
+			 * 
+			 * while (enu.hasMoreElements()) {
+			 * 
+			 * String name = (String) enu.nextElement(); String[] values =
+			 * req.getParameterValues(name);
+			 * 
+			 * for (int i = 0; i < values.length; i++) { System.out.println(name + "["+ i +
+			 * "]:" + values[i]); }
+			 * 
+			 * qtyDTO dto = new qtyDTO();
+			 * 
+			 * dto.setData(values);
+			 * 
+			 * DutyfreeDAO dao = new DutyfreeDAO();
+			 * 
+			 * int result = dao.edit(dto);
+			 * 
+			 * req.setAttribute("result", result);
+			 * 
+			 * }
+			 */
+
+			/*
+			 * String[] input = req.getParameterValues("input"); for (int i = 0; i <
+			 * input.length; i++) {
+			 * 
+			 * System.out.println("배열" + input[i]); }
+			 */
+
+			/*
+			 * String store_id = req.getParameter("store_id"); String due_id =
+			 * req.getParameter("due_id"); String product_code =
+			 * req.getParameter("product_code"); String product_qty =
+			 * req.getParameter("product_qty");
+			 * 
+			 * productDTO dto = new productDTO();
+			 * 
+			 * dto.setProduct_code(store_id); System.out.println(store_id);
+			 * dto.setProduct_name(due_id); System.out.println(due_id);
+			 * dto.setProduct_color(product_code); System.out.println(product_code);
+			 * dto.setProduct_size(product_qty); System.out.println(product_qty);
+			 * 
+			 * DutyfreeDAO dao = new DutyfreeDAO();
+			 * 
+			 * int result = dao.edit(dto);
+			 * 
+			 * req.setAttribute("result", result);
+			 */
+
+			int[] order_id = Arrays.stream(req.getParameterValues("order_id")).mapToInt(Integer::parseInt).toArray();
+			// Arrays.stream(req.getParameterValues("order_id")).mapToInt(Integer::parseInt).toArray();
+			String[] store_id = req.getParameterValues("store_id");
+			String[] due_id = req.getParameterValues("due_id");
+			String[] product_code = req.getParameterValues("product_code");
+			int[] product_qty = Arrays.stream(req.getParameterValues("product_qty")).mapToInt(Integer::parseInt)
+					.toArray();
+
+			/*
+			 * for (int i = 0; i < input.length; i++) {
+			 * 
+			 * System.out.println("배열" + input[i]); }
+			 */
+
+			qtyDTO dto = new qtyDTO();
+
+			dto.setOrderId(order_id);
+			dto.setStoreId(store_id);
+			dto.setDueId(due_id);
+			dto.setProductCode(product_code);
+			dto.setProductQty(product_qty);
+
+			DutyfreeDAO dao = new DutyfreeDAO();
+
+			int result = dao.edit(dto);
+			System.out.println("result 값:" + result);
+
+			req.setAttribute("result", result);
 
 		}
 
-		System.out.println("doPost");
+		RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/views/dutyfree/list.jsp");
+		dispatcher.forward(req, resp);
 
 	}
 }

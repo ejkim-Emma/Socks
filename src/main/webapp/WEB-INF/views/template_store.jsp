@@ -34,18 +34,12 @@
 				<div class="position-sticky sidebar-sticky">
 					<h6
 						class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted text-uppercase">
-						<span>총무과</span>
+						<span>매장</span>
 					</h6>
 					<ul class="nav flex-column">
-						<li class="nav-item"><a class="nav-link" href="/Socks/product/list.do"> > <span
-								data-feather="home" class="align-text-bottom"></span> 양말 품목 관리
-						</a></li>
-						<li class="nav-item"><a class="nav-link" href="/Socks/period/list.do"> > <span
-								data-feather="file" class="align-text-bottom"></span> 신청 기간 관리
-						</a></li>
-						<li class="nav-item"><a class="nav-link" href="/Socks/order/list.do"> > <span
-								data-feather="shopping-cart" class="align-text-bottom"></span>
-								Order 내역 관리
+						<li class="nav-item"><a class="nav-link" aria-current="page"
+							href="/Socks/dutyfree/list.do"> > <span
+								data-feather="file-text" class="align-text-bottom"></span> 양말 오더
 						</a></li>
 					</ul>
 				</div>

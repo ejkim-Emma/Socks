@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,12 +9,12 @@
 <title>SocksOrder</title>
 <%@ include file="/WEB-INF/views/inc/asset.jsp"%>
 <style>
-.table-scroll {
+.table-wrapper {
 	overflow: auto;
 	text-align: center;
 }
 
-.table-scroll thead th {
+.table-wrapper thead th {
 	background: #859395;
 	color: #fff;
 	position: sticky;
@@ -74,29 +75,33 @@
 			</div>
 
 
-			<div class="table-scroll"
-				style="height: 76%; overflow-x: hidden; overflow-y: auto;">
+			<div class="table-wrapper"
+				style="overflow-y: auto; border-collapse: collapse; height: 500px; padding-top: 0px;">
 
 				<table class="table table-bordered" id="update">
 					<thead>
 						<tr>
-							<th scope="col" style="width: 22%;">상품명</th>
-
-							<th scope="col" style="width: 16%;">상품코드</th>
-							<th scope="col" style="width: 16%;">사이즈</th>
-							<th scope="col" style="width: 16%;">컬러</th>
-							<th scope="col" style="width: 16%;">단가</th>
-							<th scope="col" style="width: 10%;">삭제 / 수정</th>
+							<th style="width: 5%;">No</th>
+							<th scope="col" style="width: 25%;">상품명</th>
+							<th scope="col" style="width: 15%;">상품코드</th>
+							<th scope="col" style="width: 10%;">사이즈</th>
+							<th scope="col" style="width: 10%;">컬러</th>
+							<th scope="col" style="width: 10%;">단가</th>
+							<th scope="col" style="width: 10%;">항목 당 수량</th>
+							<th scope="col" style="width: 15%;">삭제 / 수정</th>
 						</tr>
 					</thead>
 					<tbody>
 						<c:forEach items="${list}" var="list">
+							<c:set var="i" value="${i+1}" />
 							<tr>
+								<td>${i}</td>
 								<td>${list.product_name}</td>
 								<td>${list.product_code}</td>
 								<td>${list.product_size}</td>
 								<td>${list.product_color}</td>
-								<td>${list.unit_price}</td>
+								<td><fmt:formatNumber value="${list.unit_price}" pattern="#,###" /></td>
+								<td>${list.order_unit}</td>
 								<th>
 									<!-- onclick 이벤트를 할때 ? 앞에 명시하는 것이 서버(서블릿)에서 가져올 수 있는 것 > 이름이 같아야 한다. -->
 									<!-- html에서 name은 태그명, 폼: submit 시  서버(서블릿)에서 name명으로 값을 가져올 수 있다.
@@ -105,9 +110,9 @@
 											onclick="location.href='/Socks/product/del.do?product_code=${list.product_code}'">삭제</button> --%>
 									<!-- Button trigger modal --> <%-- <input type="text" value="${list.product_code}" name="product_code"> --%>
 
-									<input type="button" value="삭제" data-bs-toggle="modal"
+									<input type="submit" value="삭제" data-bs-toggle="modal"
 									data-bs-target="#del" data-bs-code="${list.product_code}">
-									/ <input type="button" value="수정"
+									/ <input type="submit" value="수정"
 									onclick="location.href='/Socks/product/edit.do?product_code=${list.product_code}&product_name=${list.product_name}&unit_price=${list.unit_price}&product_size=${list.product_size}&product_color=${list.product_color}'">
 								</th>
 							</tr>
@@ -211,7 +216,7 @@
 		}); */
 
 		// 'table' 변수 선언 > Id로 가져옴
-		var table = document.getElementById('update');
+		/* var table = document.getElementById('update');
 		// 'table' 에서 'tagname'으로 가져오는 'td'를 'cells'로 선언
 		var cells = table.getElementsByTagName('td');
 
@@ -272,7 +277,7 @@
 				this.append(input);
 				this.firstElementChild.select();
 			}
-		}
+		} */
 	</script>
 </body>
 </html>

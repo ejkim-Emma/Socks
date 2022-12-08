@@ -25,6 +25,7 @@ public class AddOk extends HttpServlet {
 		String size = req.getParameter("size");
 		String color = req.getParameter("color");
 		String price = req.getParameter("price");
+		int unit = Integer.parseInt(req.getParameter("order_unit"));
 		
 		productDTO dto = new productDTO();
 		
@@ -33,6 +34,7 @@ public class AddOk extends HttpServlet {
 		dto.setProduct_color(color);
 		dto.setProduct_size(size);
 		dto.setUnit_price(price);
+		dto.setOrder_unit(unit);
 		
 		ProductDAO dao = new ProductDAO();
 		

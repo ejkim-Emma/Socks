@@ -106,7 +106,7 @@ public class OrderDAO {
 		try {
 			conn = DBUtil.open();
 
-			String sql = "select distinct Year\r\n" + "  from bbsupply_order_due";
+			String sql = "select distinct Year\r\n" + "  from bbsupply_order_due order by Year desc";
 
 			stat = conn.createStatement();
 			rs = stat.executeQuery(sql);
