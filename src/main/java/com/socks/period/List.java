@@ -12,9 +12,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.socks.dto.orderdueDTO;
-import com.socks.dto.periodDTO;
-
-import sun.dc.pr.PRError;
 
 @WebServlet("/period/list.do")
 public class List extends HttpServlet {

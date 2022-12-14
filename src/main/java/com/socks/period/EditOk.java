@@ -22,6 +22,7 @@ public class EditOk extends HttpServlet {
 		
 		int year = Integer.parseInt(req.getParameter("year"));
 		int month = Integer.parseInt(req.getParameter("month"));
+		System.out.println("월입니다." + month);
 		String start = req.getParameter("start");
 		String end = req.getParameter("end");
 		String due_id = req.getParameter("due_ID");

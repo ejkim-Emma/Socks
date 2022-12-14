@@ -168,6 +168,7 @@ public class List extends HttpServlet {
 			int[] order_id = Arrays.stream(req.getParameterValues("order_id")).mapToInt(Integer::parseInt).toArray();
 			// Arrays.stream(req.getParameterValues("order_id")).mapToInt(Integer::parseInt).toArray();
 			String[] store_id = req.getParameterValues("store_id");
+			System.out.println("스토어 아이디?" + store_id);
 			String[] due_id = req.getParameterValues("due_id");
 			String[] product_code = req.getParameterValues("product_code");
 			int[] product_qty = Arrays.stream(req.getParameterValues("product_qty")).mapToInt(Integer::parseInt)

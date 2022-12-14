@@ -19,10 +19,10 @@ public class SelectDutyAjax extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
 		
-		// System.out.println("ajax 안에 들어오기");
+		System.out.println("ajax 안에 들어오기");
 		String Brand_ID = req.getParameter("Brand_ID");
 
-		System.out.println("내가 고른 브랜드 아이디: " + Brand_ID);
+		// System.out.println("내가 고른 브랜드 아이디: " + Brand_ID);
 
 		StoreDAO dao = new StoreDAO();
 
@@ -60,6 +60,8 @@ public class SelectDutyAjax extends HttpServlet {
 
 		writer.close();
 
+		// System.out.println("스토어 아이디를 보여줍니다." + writer);
+		
 	}
 
 }

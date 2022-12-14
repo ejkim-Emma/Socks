@@ -42,36 +42,59 @@
 						<tr>
 							<th class="table-active align-middle text-center">신청년월</th>
 							<td colspan="3">
-								<div
-									class="d-flex col-8 flex-wrap flex-md-nowrap align-items-center">
-									<select class="form-select w-50" name="year" required>
-										<option value="" disabled selected>${edit.year}</option>
+								<div class="d-flex col-8 flex-wrap flex-md-nowrap align-items-center">
+									
+									<!-- 월 -->
+									<select class="form-select w-50" name="year" id="year" required>
+										<option value="${edit.year}" selected>${edit.year}</option>
 										<c:forEach items="${ylist}" var="ylist">
 											<option value="${ylist.year}">${ylist.year}</option>
 										</c:forEach>
-									</select> <label class="col-1 col-form-label text-center">년</label> <select
-										class="form-select w-50" name="month" required>
-										<option value="${edit.month}" disabled selected>${edit.month}</option>
+									</select>
+									<label class="col-1 col-form-label text-center">년</label>
+									
+									<!-- 년 -->
+									<select class="form-select w-50" name="month" required>
+										<option value="${edit.month}" selected>${edit.month}</option>
 										<c:forEach items="${mlist}" var="mlist">
 											<option value="${mlist.month}">${mlist.month}</option>
 										</c:forEach>
-									</select> <label class="col-1 col-form-label text-center">월</label>
+									</select>
+									<label class="col-1 col-form-label text-center">월</label>
+								
 								</div>
 							</td>
 						</tr>
 						<tr>
 							<th class="table-active align-middle">신청시작일</th>
-							<td><input type="date" value="${edit.sta_Date}" name="start" class="form-control"
-								required></td>
+							<td>
+								<input type="date" value="${edit.sta_Date}" name="start" class="form-control" required>
+							</td>
 							<th class="table-active align-middle">신청종료일</th>
-							<td><input type="date" value="${edit.closing_Date}" name="end" class="form-control"
-								required></td>
+							<td>
+								<input type="date" value="${edit.closing_Date}" name="end" class="form-control" required>
+							</td>
 						</tr>
 					</table>
 					<input type="hidden" value="${edit.due_id}" name="due_ID" />
 				</form>
+				<c:set var="select" value="${edit.month}" />
+				<c:forEach items="${mlist}" var="list">
+					<c:if test="${list.month eq select}">
+						${list.month}
+					</c:if>
+				</c:forEach>
+				<c:set var="sel2" value="${edit.year}" />
+				<c:forEach items="${ylist}" var="list">
+					<c:if test="${list.year eq sel2}">
+						${list.year}
+					</c:if>
+				</c:forEach>
 			</main>
 		</section>
 	</main>
+	<script>
+	/* $('#year').val("1").prop("selected", true); */
+	</script>
 </body>
 </html>

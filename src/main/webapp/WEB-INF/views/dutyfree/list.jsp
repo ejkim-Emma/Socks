@@ -138,8 +138,7 @@
 									<input type="hidden" value="${list.order_id}" name="order_id" />
 									<input type="hidden" value="${list.store_id}" name="store_id" />
 									<input type="hidden" value="${list.due_id}" name="due_id" />
-									<input type="hidden" value="${list.product_code}"
-										name="product_code" />
+									<input type="hidden" value="${list.product_code}" name="product_code" />
 									<%-- <input type="text" value="${list.closing_date}" name="order_id" /> --%>
 									<tr>
 										<%-- <th>${list.day}</th> --%>

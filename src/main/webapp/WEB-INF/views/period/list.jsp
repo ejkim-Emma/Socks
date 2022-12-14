@@ -76,7 +76,10 @@
 									<button type="button" class="btn-close" data-bs-dismiss="modal"
 										aria-label="Close"></button>
 								</div>
-								<div class="modal-body">저장하시겠습니까?</div>
+								<div class="modal-body">
+								저장하시겠습니까?
+								
+								</div>
 								<div class="modal-footer">
 									<button type="button" class="btn btn-secondary"
 										data-bs-dismiss="modal">취소</button>
@@ -95,6 +98,7 @@
 			$(document).ready(function() {
 				$('#del').on('show.bs.modal', function(event) {
 					CODE = $(event.relatedTarget).data('bs-code');
+					console.log('코드를 가져오나' + CODE);
 				});
 			});
 

@@ -39,7 +39,8 @@ public class ProductDAO {
 //			}
 
 			String sql = "select *\r\n" + "  from bbsupply_product\r\n" + " where (? is null or product_name = ?)\r\n"
-					+ "   and (? is null or product_size = ?)\r\n" + "   and (? is null or product_color = ?) order by product_name asc";
+					+ "   and (? is null or product_size = ?)\r\n"
+					+ "   and (? is null or product_color = ?) order by product_name asc";
 
 //			System.out.println("mapping" + map.get("product_name"));
 
@@ -249,15 +250,15 @@ public class ProductDAO {
 
 	// DelOk.java
 	public int del(String product_code) {
-		
+
 		try {
-			
+
 			conn = DBUtil.open();
-			
+
 			String sql = "delete from bbsupply_product where product_code = ?";
 
 			pstat = conn.prepareStatement(sql);
-			
+
 			System.out.println(sql);
 
 			pstat.setString(1, product_code);
@@ -284,7 +285,7 @@ public class ProductDAO {
 			pstat.setString(2, dto.getProduct_size());
 			pstat.setString(3, dto.getProduct_color());
 			pstat.setString(4, dto.getUnit_price());
-			
+
 			pstat.setString(5, dto.getProduct_code());
 
 			return pstat.executeUpdate();
@@ -296,15 +297,15 @@ public class ProductDAO {
 		}
 		return 0;
 	}
-	
+
 	public ArrayList<productDTO> plist() {
-		
+
 		try {
 
 			conn = DBUtil.open();
 
-			String sql = "select product_code, product_name, product_size, product_color\r\n" + 
-					"  from bbsupply_product";
+			String sql = "select product_code, product_name, product_size, product_color\r\n"
+					+ "  from bbsupply_product";
 
 			stat = conn.createStatement();
 
@@ -337,11 +338,131 @@ public class ProductDAO {
 
 		return null;
 	}
-	
+
+	public int save(productDTO dto) {
+
+		// for (int i = 0; i < dto.getProductCode().length; i++) {
+			// System.out.println("데이터 넘어왔니?" + dto.getProductName()[i]);
+		// }
+
+		// String pCode = dto.getSelectCode()[0];
+		// System.out.println("코드: " + pCode);
+
+		if (dto.getSelectCode() != null) {
+
+			try {
+
+				int count[] = new int[dto.getSelectCode().length];
+
+				String sql = "delete from bbsupply_product where product_code = ?";
+
+				pstat = conn.prepareStatement(sql);
+
+				for (int i = 0; i < dto.getSelectCode().length; i++) {
+					pstat.setString(1, dto.getSelectCode()[i]);
+					System.out.println("상품코드 get: " + dto.getSelectCode()[i]);
+
+					pstat.addBatch();
+					pstat.clearParameters();
+				}
+
+				count = pstat.executeBatch();
+				// System.out.println("카운트 담았니?" + count);
+				// System.out.println("길이: " + dto.getSelectCode().length + "/" + count.length);
+
+				int updateCount[] = new int[dto.getProductCode().length];
+
+				String sql2 = "update bbsupply_product set product_name = ?, product_size = ?, product_color = ?, unit_price = ?, order_unit = ? where product_code = ?";
+
+				pstat = conn.prepareStatement(sql2);
+
+				// System.out.println("updateCount의 길이는?" + updateCount.length);
+
+				for (int j = 0; j < updateCount.length; j++) {
+					System.out.println("반복문 도는 거니?" + j);
+
+					// 상품명
+					pstat.setString(1, dto.getProductName()[j]);
+					// 사이즈
+					pstat.setString(2, dto.getProductSize()[j]);
+					// 컬러
+					pstat.setString(3, dto.getProductColor()[j]);
+					// 단가
+					pstat.setInt(4, dto.getProductPrice()[j]);
+					// 항목 당 수량
+					pstat.setInt(5, dto.getProductQty()[j]);
+					// 상품코드
+					pstat.setString(6, dto.getProductCode()[j]);
+
+					pstat.addBatch();
+					pstat.clearParameters();
+
+				}
+
+				updateCount = pstat.executeBatch();
+				// System.out.println("업데이트 몇 개?" + updateCount);
+				// System.out.println("업데이트 길이?" + updateCount.length);
+
+			} catch (Exception e) {
+
+				System.out.println("상품 코드 삭제에 실패하였습니다.");
+				e.printStackTrace();
+				return 0;
+			}
+
+		} else if (dto.getSelectCode() == null) {
+			try {
+
+				int updateCount[] = new int[dto.getProductCode().length];
+
+				String sql2 = "update bbsupply_product set product_name = ?, product_size = ?, product_color = ?, unit_price = ?, order_unit = ? where product_code = ?";
+
+				pstat = conn.prepareStatement(sql2);
+
+				// System.out.println("updateCount의 길이는?" + updateCount.length);
+
+				for (int j = 0; j < updateCount.length; j++) {
+					// System.out.println("반복문 도는 거니?" + j);
+
+					// 상품명
+					pstat.setString(1, dto.getProductName()[j]);
+					// System.out.println("이름" + dto.getProductName()[j]);
+					// 사이즈
+					pstat.setString(2, dto.getProductSize()[j]);
+					// System.out.println("이름" + dto.getProductSize()[j]);
+					// 컬러
+					pstat.setString(3, dto.getProductColor()[j]);
+					// System.out.println("이름" + dto.getProductColor()[j]);
+					// 단가
+					pstat.setInt(4, dto.getProductPrice()[j]);
+					System.out.println("이름" + dto.getProductPrice()[j]);
+					// 항목 당 수량
+					pstat.setInt(5, dto.getProductQty()[j]);
+					// System.out.println("이름" + dto.getProductQty()[j]);
+					// 상품코드
+					pstat.setString(6, dto.getProductCode()[j]);
+					// System.out.println("이름" + dto.getProductCode()[j]);
+
+					pstat.addBatch();
+					pstat.clearParameters();
+
+				}
+
+				updateCount = pstat.executeBatch();
+				// System.out.println("업데이트 몇 개?" + updateCount);
+				System.out.println("업데이트 길이?" + updateCount.length);
+			} catch (Exception e) {
+				System.out.println("상품 코드 삭제에 실패하였습니다.");
+				e.printStackTrace();
+				return 0;
+			}
+		}
+
+		return 1;
+	}
+
 	// 확인하는 방법
 	// public static void main(String[] args) {
-
-	
 
 	// ProductDAO dao = new ProductDAO();
 

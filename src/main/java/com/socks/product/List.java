@@ -2,6 +2,7 @@ package com.socks.product;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 
 import javax.servlet.RequestDispatcher;
@@ -13,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.socks.dto.productDTO;
+import com.socks.dutyfree.DutyfreeDAO;
 
 @WebServlet("/product/list.do")
 public class List extends HttpServlet {
@@ -121,6 +123,48 @@ public class List extends HttpServlet {
 
 		RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/views/product/list.jsp");
 		dispatcher.forward(req, resp);
+	}
+	
+	@Override
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
+		// System.out.println("넘어온다?");
+		
+		req.setCharacterEncoding("UTF-8");
+		
+		String[] selectCode = req.getParameterValues("product_code");
+		System.out.println("셀렉트 박스 내용 넘어옴?" + selectCode);
+		
+		String[] productCode = req.getParameterValues("pcode");
+		String[] productName = req.getParameterValues("pname");
+		String[] productSize = req.getParameterValues("psize");
+		String[] productColor = req.getParameterValues("pcolor");
+		int[] productPrice = Arrays.stream(req.getParameterValues("pprice")).mapToInt(Integer::parseInt).toArray();
+		int[] productQty = Arrays.stream(req.getParameterValues("punit")).mapToInt(Integer::parseInt).toArray();
+		
+		// System.out.println("코드 받았니?" + productCode + "이름받앗니?" + productName + "사이즈 받았니?" + productSize + "색받았니?" + productColor + "단가: " + productPrice + "수량:" + productQty);
+		// System.out.println("체크한 값 받앗니?" + selectCode);
+		
+		productDTO dto = new productDTO();
+		
+		dto.setSelectCode(selectCode);
+		dto.setProductCode(productCode);
+		dto.setProductName(productName);
+		dto.setProductSize(productSize);
+		dto.setProductColor(productColor);
+		dto.setProductPrice(productPrice);
+		dto.setProductQty(productQty);
+		
+		ProductDAO dao = new ProductDAO();
+
+		int result = dao.save(dto);
+		// System.out.println("result 값:" + result);
+
+		req.setAttribute("result", result);
+		
+		RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/views/product/list.jsp");
+		dispatcher.forward(req, resp);
+
 	}
 
 }

@@ -18,4 +18,14 @@ public class productDTO {
 	
 	private int order_unit;
 	
+	private String[] selectCode;
+	
+	// 코드 배열 만들기
+	private String[] productCode;
+	private String[] productName;
+	private String[] productSize;
+	private String[] productColor;
+	private int[] productPrice;
+	private int[] productQty;
+
 }

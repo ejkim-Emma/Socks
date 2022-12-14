@@ -57,27 +57,28 @@
 	</main>
 	<script>
 
-	function brandChange(e) {
+	function brandChange() {
+		console.log('function 안인가?');
 		$.ajax ({
 			// 기본 타입은 GET
 			type: 'GET',
 			// url: 처음 만들 때 설정하는 /web location/ajax의 @WebServlet() 안에 내용
 			url: '/Socks/ajax/store.do',
-			// ajax.java에서 생성했던 String을 가져오는 것
+			// 넘길 데이터 가져오기
 			data: 'Brand_ID=' + $(event.target).val(),
 			// 여러 개의 타입이 존재
 			dataType: 'json',
 			// function () 안에 있는 것은 변수 이름
 			success: function(result) {
 				// alert('성공');
-				
+				$('#store').empty();
 				// 'store'을 아이디로 가지고 있는 것 중에 어디 위치로 갈 것인 지 append()에서 괄호 안에 넣기
-				// $('#store').append('<option value="" disabled selected>Location_Name</option>');
+				$('#store').append('<option value="" disabled selected>Store_Name</option>');
+				/* $('#store').val(''); */
 				
 				// 결과가 나오면 그것을 each문으로 돌리겠다.
 				$(result).each(function (index, item) { // 데이터 = item
 					// alert(JSON.stringify(item));
-				
 					$('#store').append('<option value="' + item.Store_ID + '">' + item.Description + '</option>')
 				});
 			},
