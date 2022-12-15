@@ -114,7 +114,7 @@ public class OrderDAO {
 			while (rs.next()) {
 				orderdueDTO cdto = new orderdueDTO();
 
-				cdto.setYear(rs.getString("Year"));
+				cdto.setYear(rs.getInt("Year"));
 				ylist.add(cdto);
 			}
 
@@ -145,7 +145,7 @@ public class OrderDAO {
 			while (rs.next()) {
 				orderdueDTO cdto = new orderdueDTO();
 
-				cdto.setMonth(rs.getString("Month"));
+				cdto.setMonth(rs.getInt("Month"));
 				mlist.add(cdto);
 			}
 

@@ -10,7 +10,7 @@ public class orderdueDTO {
 	private String Closing_Date;
 	private String Sta_Date;
 	
-	private String Year;
-	private String Month;
+	private int Year;
+	private int Month;
 	
 }

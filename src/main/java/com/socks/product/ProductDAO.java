@@ -367,7 +367,7 @@ public class ProductDAO {
 				}
 
 				count = pstat.executeBatch();
-				// System.out.println("카운트 담았니?" + count);
+				System.out.println("카운트 담았니?" + count);
 				// System.out.println("길이: " + dto.getSelectCode().length + "/" + count.length);
 
 				int updateCount[] = new int[dto.getProductCode().length];
@@ -400,7 +400,7 @@ public class ProductDAO {
 				}
 
 				updateCount = pstat.executeBatch();
-				// System.out.println("업데이트 몇 개?" + updateCount);
+				System.out.println("업데이트 몇 개?" + updateCount);
 				// System.out.println("업데이트 길이?" + updateCount.length);
 
 			} catch (Exception e) {
@@ -449,7 +449,7 @@ public class ProductDAO {
 				}
 
 				updateCount = pstat.executeBatch();
-				// System.out.println("업데이트 몇 개?" + updateCount);
+				System.out.println("업데이트 몇 개?" + updateCount);
 				System.out.println("업데이트 길이?" + updateCount.length);
 			} catch (Exception e) {
 				System.out.println("상품 코드 삭제에 실패하였습니다.");

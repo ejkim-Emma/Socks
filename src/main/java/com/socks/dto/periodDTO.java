@@ -12,4 +12,14 @@ public class periodDTO {
 	private String Sta_Date;
 	private String Closing_Date;
 	
+	
+	private String[] orderClose;
+	private String[] orderStart;
+	private String[] orderPeriod;
+	private String[] orderDueId;
+	private int[] orderYear;
+	private int[] orderMonth;
+	
+	private String[] selectDueId;
+	
 }

@@ -73,7 +73,7 @@
 			</div>
 			<a class="btn btn-warning float-end mb-1" href="/Socks/product/add.do">항목 추가</a>
 			<form method="POST" action="/Socks/product/list.do">
-				<button class="btn btn-success mb-1" onclick="test()" id="del">저장</button>
+				<button class="btn btn-outline-success mb-1" onclick="test()" id="del">저장</button>
 
 				<div class="table-wrapper"
 					style="overflow-y: auto; border-collapse: collapse; height: 500px; padding-top: 0px;">
@@ -82,13 +82,14 @@
 						<thead>
 							<tr>
 								<th style="width: 5%;">No</th>
+								<th scope="col" style="width: 5%;">삭제</th>
 								<th scope="col" style="width: 15%;">상품코드</th>
 								<th scope="col" style="width: 25%;">상품명</th>
 								<th scope="col" style="width: 10%;">사이즈</th>
 								<th scope="col" style="width: 10%;">컬러</th>
 								<th scope="col" style="width: 10%;">단가</th>
 								<th scope="col" style="width: 10%;">항목 당 수량</th>
-								<th scope="col" style="width: 15%;">삭제</th>
+								
 							</tr>
 						</thead>
 						<tbody>
@@ -99,6 +100,20 @@
 									value="${list.product_code}" />
 								<tr>
 									<td>${i}</td>
+									<td>
+										<!-- onclick 이벤트를 할때 ? 앞에 명시하는 것이 서버(서블릿)에서 가져올 수 있는 것 > 이름이 같아야 한다. -->
+										<!-- html에서 name은 태그명, 폼: submit 시  서버(서블릿)에서 name명으로 값을 가져올 수 있다.
+                               value는 해당 태그의 값 > 서버(서블릿)에서 name명으로 꺼낸 값에는 value에 해당하는 값이 들어있음
+                            --> <%-- <button type="submit"
+                                 onclick="location.href='/Socks/product/del.do?product_code=${list.product_code}'">삭제</button> --%>
+										<!-- Button trigger modal --> <%-- <input type="text" value="${list.product_code}" name="product_code"> --%>
+
+										<input id="checking" name="product_code" type="checkbox"
+										value="${list.product_code}" <%-- data-bs-toggle="modal"
+                           data-bs-target="#del" data-bs-code="${list.product_code}" --%> />
+										<%-- / <input type="submit" value="수정"
+                           onclick="location.href='/Socks/product/edit.do?product_code=${list.product_code}&product_name=${list.product_name}&unit_price=${list.unit_price}&product_size=${list.product_size}&product_color=${list.product_color}'"> --%>
+									</td>
 									<td><input type="text"
 										class="form-control form-control-sm"
 										value="${list.product_code}" disabled /></td>
@@ -117,20 +132,7 @@
 									<td><input name="punit" type="text"
 										class="form-control form-control-sm"
 										value="${list.order_unit}" /></td>
-									<td>
-										<!-- onclick 이벤트를 할때 ? 앞에 명시하는 것이 서버(서블릿)에서 가져올 수 있는 것 > 이름이 같아야 한다. -->
-										<!-- html에서 name은 태그명, 폼: submit 시  서버(서블릿)에서 name명으로 값을 가져올 수 있다.
-                               value는 해당 태그의 값 > 서버(서블릿)에서 name명으로 꺼낸 값에는 value에 해당하는 값이 들어있음
-                            --> <%-- <button type="submit"
-                                 onclick="location.href='/Socks/product/del.do?product_code=${list.product_code}'">삭제</button> --%>
-										<!-- Button trigger modal --> <%-- <input type="text" value="${list.product_code}" name="product_code"> --%>
-
-										<input id="checking" name="product_code" type="checkbox"
-										value="${list.product_code}" <%-- data-bs-toggle="modal"
-                           data-bs-target="#del" data-bs-code="${list.product_code}" --%> />
-										<%-- / <input type="submit" value="수정"
-                           onclick="location.href='/Socks/product/edit.do?product_code=${list.product_code}&product_name=${list.product_name}&unit_price=${list.unit_price}&product_size=${list.product_size}&product_color=${list.product_color}'"> --%>
-									</td>
+									
 								</tr>
 							</c:forEach>
 						</tbody>
